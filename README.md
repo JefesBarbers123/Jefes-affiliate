@@ -31,6 +31,26 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 
 ## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+From the `web` folder:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+npm run build
+npx vercel
+npx vercel --prod
+```
+
+Set these environment variables in Vercel project settings:
+
+- `AIRTABLE_API_KEY`
+- `AIRTABLE_BASE_ID`
+- `AIRTABLE_BARBERS_TABLE`
+- `AIRTABLE_APPOINTMENTS_TABLE`
+- `AIRTABLE_AVAILABILITY_TABLE`
+- `AIRTABLE_WITHDRAWALS_TABLE`
+- `AIRTABLE_EMAIL_LOGS_TABLE`
+- `RESEND_API_KEY`
+- `APP_URL` (set to your deployed URL)
+- `AUTH_SECRET`
+- `EMAIL_FROM_BOOKINGS` (optional once domain is verified)
+- `EMAIL_FROM_UPDATES` (optional once domain is verified)
+- `EMAIL_FROM_REMINDERS` (optional once domain is verified)

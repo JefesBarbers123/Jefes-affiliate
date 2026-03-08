@@ -1,9 +1,16 @@
 import { NextResponse } from "next/server";
-import { appointmentsTable, barbersTable } from "@/lib/airtable";
+import { appointmentsTable, barbersTable, isAirtableConfigured } from "@/lib/airtable";
 import { createApprovalToken } from "@/lib/approvalToken";
 import { sendBarberApprovalEmail } from "@/lib/email";
 
 export async function POST(request: Request) {
+  if (!isAirtableConfigured || !appointmentsTable || !barbersTable) {
+    return NextResponse.json(
+      { error: "Airtable is not configured. Add your API key and base ID to .env" },
+      { status: 503 }
+    );
+  }
+
   const body = await request.json();
   const { appointmentId } = body as { appointmentId: string };
 

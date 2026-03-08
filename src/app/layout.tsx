@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { GlobalNav } from "@/components/global-nav";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -13,9 +14,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Barber Management Platform",
+  title: "Jefes Affiliates",
   description:
-    "Multi-location barber management platform with Airtable backend and dark-mode barber/admin console.",
+    "Jefes Affiliates operations platform with Airtable backend and dark-mode barber/admin console.",
 };
 
 export default function RootLayout({
@@ -26,6 +27,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <GlobalNav />
         {children}
       </body>
     </html>
