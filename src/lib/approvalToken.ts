@@ -1,9 +1,11 @@
 import crypto from "crypto";
 
-const AUTH_SECRET = process.env.AUTH_SECRET;
-
-if (!AUTH_SECRET) {
-  throw new Error("Missing AUTH_SECRET. Check your environment variables.");
+function getAuthSecret(): string {
+  const secret = process.env.AUTH_SECRET;
+  if (!secret) {
+    throw new Error("Missing AUTH_SECRET. Check your environment variables.");
+  }
+  return secret;
 }
 
 function base64UrlEncode(input: Buffer) {
@@ -25,7 +27,7 @@ function base64UrlDecode(input: string) {
 
 export function createApprovalToken(appointmentId: string, barberId: string) {
   const payload = `${appointmentId}:${barberId}`;
-  const hmac = crypto.createHmac("sha256", AUTH_SECRET);
+  const hmac = crypto.createHmac("sha256", getAuthSecret());
   hmac.update(payload);
   const signature = hmac.digest();
 
@@ -41,7 +43,7 @@ export function verifyApprovalToken(token: string) {
   const payloadBuf = base64UrlDecode(payloadPart);
   const sigBuf = base64UrlDecode(sigPart);
 
-  const hmac = crypto.createHmac("sha256", AUTH_SECRET);
+  const hmac = crypto.createHmac("sha256", getAuthSecret());
   hmac.update(payloadBuf);
   const expectedSig = hmac.digest();
 
