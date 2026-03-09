@@ -1,12 +1,11 @@
 "use client";
 
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import { UserPlus, Mail, Link2, Banknote, Phone, KeyRound, Hash } from "lucide-react";
 
 export default function SignupPage() {
   const router = useRouter();
-  const searchParams = useSearchParams();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
@@ -18,11 +17,11 @@ export default function SignupPage() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const fromLink = searchParams.get("ref");
+    const fromLink = new URLSearchParams(window.location.search).get("ref");
     if (fromLink) {
       setReferralCode(fromLink.toUpperCase());
     }
-  }, [searchParams]);
+  }, []);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
